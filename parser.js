@@ -96,7 +96,7 @@ module.exports.parse = (raw, { yaml, console }) => {
     },
   }
   config.rules = [
-    'RULE-SET,applications,DIRECT',
+    'RULE-SET,applications,BitTorrent',
     'DOMAIN,clash.razord.top,DIRECT',
     'DOMAIN,yacd.haishan.me,DIRECT',
     'RULE-SET,private,DIRECT',
@@ -126,6 +126,11 @@ module.exports.parse = (raw, { yaml, console }) => {
     name: '指定节点',
     type: 'select',
     proxies: config.proxies.map((proxy) => proxy.name),
+  })
+  config['proxy-groups'].push({
+    name: 'BitTorrent',
+    type: 'select',
+    proxies: ['DIRECT', 'PROXY'],
   })
   config['proxy-groups'].push({
     name: '自动选择',
