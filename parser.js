@@ -114,7 +114,7 @@ module.exports.parse = (raw, { yaml, console }) => {
     'MATCH,PROXY',
   ]
 
-  const groupNameList = ['香港', '台湾', '美国', '日本']
+  const groupNameList = ['香港', '台湾', '美国', '日本', '实验性', '标准', '高级']
 
   config['proxy-groups'].push({
     name: 'PROXY',
