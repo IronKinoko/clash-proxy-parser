@@ -97,6 +97,10 @@ module.exports.parse = (raw, { yaml, console }) => {
   }
   config.rules = [
     'RULE-SET,applications,BitTorrent',
+    'DOMAIN-KEYWORD,steamserver.net,DIRECT',
+    'DOMAIN-KEYWORD,hf-mirror.com,DIRECT',
+    'DOMAIN-KEYWORD,exhentai.org,e-hentai',
+    'DOMAIN-KEYWORD,e-hentai.org,e-hentai',
     'DOMAIN,clash.razord.top,DIRECT',
     'DOMAIN,yacd.haishan.me,DIRECT',
     'RULE-SET,private,DIRECT',
@@ -111,17 +115,21 @@ module.exports.parse = (raw, { yaml, console }) => {
     'RULE-SET,telegramcidr,PROXY',
     'GEOIP,LAN,DIRECT',
     'GEOIP,CN,DIRECT',
-    'MATCH,PROXY',
+    'MATCH,Final',
   ]
 
   const groupNameList = ['香港', '台湾', '美国', '日本', '实验性', '标准', '高级']
 
   config['proxy-groups'].push({
+    name: 'Final',
+    type: 'select',
+    proxies: ['DIRECT', 'PROXY'],
+  })
+  config['proxy-groups'].push({
     name: 'PROXY',
     type: 'select',
     proxies: ['指定节点', '自动选择', '故障转移', ...groupNameList],
   })
-
   config['proxy-groups'].push({
     name: '指定节点',
     type: 'select',
@@ -131,6 +139,11 @@ module.exports.parse = (raw, { yaml, console }) => {
     name: 'BitTorrent',
     type: 'select',
     proxies: ['DIRECT', 'PROXY'],
+  })
+  config['proxy-groups'].push({
+    name: 'e-hentai',
+    type: 'select',
+    proxies: config.proxies.map((proxy) => proxy.name),
   })
   config['proxy-groups'].push({
     name: '自动选择',
