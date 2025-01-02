@@ -119,6 +119,24 @@ module.exports.parse = (raw, { yaml, console }) => {
   ]
 
   const groupNameList = ['香港', '台湾', '美国', '日本', '实验性', '标准', '高级']
+    .map((name) => {
+      return {
+        name,
+        type: 'url-test',
+        url: 'http://www.gstatic.com/generate_204',
+        interval: 86400,
+        proxies: config.proxies
+          .filter((proxy) => proxy.name.includes(name))
+          .map((proxy) => proxy.name),
+      }
+    })
+    .filter((o) => {
+      return o.proxies.length > 0
+    })
+    .map((o) => {
+      config['proxy-groups'].push(o)
+      return o.name
+    })
 
   config['proxy-groups'].push({
     name: 'Final',
@@ -158,19 +176,6 @@ module.exports.parse = (raw, { yaml, console }) => {
     url: 'http://www.gstatic.com/generate_204',
     interval: 7200,
     proxies: config.proxies.map((proxy) => proxy.name),
-  })
-
-  // add proxy-groups by groupNameList
-  groupNameList.forEach((name) => {
-    config['proxy-groups'].push({
-      name,
-      type: 'url-test',
-      url: 'http://www.gstatic.com/generate_204',
-      interval: 86400,
-      proxies: config.proxies
-        .filter((proxy) => proxy.name.includes(name))
-        .map((proxy) => proxy.name),
-    })
   })
 
   config['proxy-groups'] = config['proxy-groups'].filter((group) => group.proxies.length > 0)
