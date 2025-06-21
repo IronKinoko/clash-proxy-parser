@@ -1,0 +1,23 @@
+{
+  "name": "clash-proxy-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^24.0.3",
+    "@types/react": "19.1.8",
+    "typescript": "^5.8.3",
+    "@types/lodash-es": "^4.17.12"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21",
+    "next": "^15.3.4",
+    "yaml": "^2.8.0"
+  }
+}

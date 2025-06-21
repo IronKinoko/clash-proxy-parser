@@ -1,4 +1,6 @@
-module.exports.parse = (raw, { yaml, console }) => {
+import yaml from 'yaml'
+
+export function parser(raw) {
   const config = yaml.parse(raw)
 
   config['proxy-groups'] = []
@@ -118,25 +120,32 @@ module.exports.parse = (raw, { yaml, console }) => {
     'MATCH,Final',
   ]
 
-  const groupNameList = ['香港', '台湾', '美国', '日本', '实验性', '标准', '高级']
-    .map((name) => {
+  const groupList = Object.entries({
+    香港: ['香港', 'Hong Kong', 'HK'],
+    台湾: ['台湾', 'Taiwan', 'TW'],
+    美国: ['美国', 'United States', 'US'],
+    日本: ['日本', 'Japan', 'JP'],
+    新加坡: ['新加坡', 'Singapore', 'SG'],
+    实验性: ['实验性'],
+    标准: ['标准'],
+    高级: ['高级'],
+  })
+    .map(([name, keys]) => {
       return {
         name,
         type: 'url-test',
         url: 'http://www.gstatic.com/generate_204',
         interval: 86400,
         proxies: config.proxies
-          .filter((proxy) => proxy.name.includes(name))
+          .filter((proxy) => keys.some((key) => proxy.name.includes(key)))
           .map((proxy) => proxy.name),
       }
     })
     .filter((o) => {
       return o.proxies.length > 0
     })
-    .map((o) => {
-      config['proxy-groups'].push(o)
-      return o.name
-    })
+
+  const groupNameList = groupList.map((o) => o.name)
 
   config['proxy-groups'].push({
     name: 'Final',
@@ -178,6 +187,7 @@ module.exports.parse = (raw, { yaml, console }) => {
     proxies: config.proxies.map((proxy) => proxy.name),
   })
 
+  config['proxy-groups'] = config['proxy-groups'].concat(groupList)
   config['proxy-groups'] = config['proxy-groups'].filter((group) => group.proxies.length > 0)
 
   return yaml.stringify(config)
