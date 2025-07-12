@@ -96,6 +96,13 @@ export function parser(raw) {
       path: './ruleset/applications.yaml',
       interval: 86400,
     },
+    fanqie: {
+      type: 'http',
+      behavior: 'classical',
+      url: 'https://cdn.jsdelivr.net/gh/ironkinoko/clash-proxy-parser/public/rules/fanqie.yaml',
+      path: './ruleset/fanqie.yaml',
+      interval: 86400,
+    },
   }
   config.rules = [
     'RULE-SET,applications,BitTorrent',
@@ -106,6 +113,7 @@ export function parser(raw) {
     'DOMAIN,clash.razord.top,DIRECT',
     'DOMAIN,yacd.haishan.me,DIRECT',
     'RULE-SET,private,DIRECT',
+    'RULE-SET,fanqie,REJECT',
     'RULE-SET,reject,REJECT',
     'RULE-SET,icloud,DIRECT',
     'RULE-SET,apple,DIRECT',
