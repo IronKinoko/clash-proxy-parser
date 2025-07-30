@@ -103,6 +103,13 @@ export function parser(raw) {
       path: './ruleset/fanqie.yaml',
       interval: 86400,
     },
+    copymanga: {
+      type: 'http',
+      behavior: 'classical',
+      url: 'https://cdn.jsdelivr.net/gh/ironkinoko/clash-proxy-parser/public/rules/copymanga.yaml',
+      path: './ruleset/copymanga.yaml',
+      interval: 86400,
+    },
   }
   config.rules = [
     'RULE-SET,applications,BitTorrent',
@@ -113,6 +120,7 @@ export function parser(raw) {
     'DOMAIN,clash.razord.top,DIRECT',
     'DOMAIN,yacd.haishan.me,DIRECT',
     'RULE-SET,private,DIRECT',
+    'RULE-SET,copymanga,PROXY',
     'RULE-SET,fanqie,REJECT',
     'RULE-SET,reject,REJECT',
     'RULE-SET,icloud,DIRECT',
@@ -178,7 +186,7 @@ export function parser(raw) {
   config['proxy-groups'].push({
     name: 'e-hentai',
     type: 'select',
-    proxies: config.proxies.map((proxy) => proxy.name),
+    proxies: ['指定节点', '自动选择', '故障转移', ...config.proxies.map((proxy) => proxy.name)],
   })
   config['proxy-groups'].push({
     name: '自动选择',
