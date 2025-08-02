@@ -1,8 +1,4 @@
-import yaml from 'yaml'
-
-export function parser(raw) {
-  const config = yaml.parse(raw)
-
+module.exports = (config) => {
   config['proxy-groups'] = []
   config['rule-providers'] = {
     reject: {
@@ -206,5 +202,5 @@ export function parser(raw) {
   config['proxy-groups'] = config['proxy-groups'].concat(groupList)
   config['proxy-groups'] = config['proxy-groups'].filter((group) => group.proxies.length > 0)
 
-  return yaml.stringify(config)
+  return config
 }
