@@ -1,0 +1,32 @@
+proxies:
+  - { name: '🇭🇰 Hong Kong 01' }
+  - { name: '🇭🇰 Hong Kong 02' }
+  - { name: '🇭🇰 Hong Kong 03' }
+  - { name: '🇭🇰 Hong Kong 04' }
+  - { name: '🇭🇰 Hong Kong 05' }
+  - { name: '🇹🇼 Taiwan 01' }
+  - { name: '🇹🇼 Taiwan 02' }
+  - { name: '🇹🇼 Taiwan 03' }
+  - { name: '🇹🇼 Taiwan 04' }
+  - { name: '🇹🇼 Taiwan 05' }
+  - { name: '🇸🇬 Singapore 01' }
+  - { name: '🇸🇬 Singapore 02' }
+  - { name: '🇸🇬 Singapore 03' }
+  - { name: '🇸🇬 Singapore 04' }
+  - { name: '🇸🇬 Singapore 05' }
+  - { name: '🇯🇵 Japan 01' }
+  - { name: '🇯🇵 Japan 02' }
+  - { name: '🇯🇵 Japan 03' }
+  - { name: '🇯🇵 Japan 04' }
+  - { name: '🇯🇵 Japan 05' }
+  - { name: '🇺🇸 United States 01' }
+  - { name: '🇺🇸 United States 02' }
+  - { name: '🇺🇸 United States 03' }
+  - { name: '🇺🇸 United States 04' }
+  - { name: '🇺🇸 United States 05' }
+  - { name: '🇩🇪 Germany 01' }
+  - { name: '🇬🇧 Britain 01' }
+  - { name: '🇬🇧 Britain 02' }
+  - { name: '🇦🇷 Argentina 01' }
+  - { name: '🇹🇷 Turkey 01' }
+  - { name: '🇮🇳 India 01' }

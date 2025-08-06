@@ -18,6 +18,9 @@ export async function GET(req: NextRequest) {
     headers: pick(Object.fromEntries(res.headers.entries()), [
       'content-disposition',
       'subscription-userinfo',
+      'transfer-encoding',
+      'profile-update-interval',
+      'profile-web-page-url',
     ]),
   })
 }

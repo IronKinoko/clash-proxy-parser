@@ -129,50 +129,83 @@ module.exports = (config) => {
     'RULE-SET,telegramcidr,PROXY',
     'GEOIP,LAN,DIRECT',
     'GEOIP,CN,DIRECT',
-    'MATCH,Final',
+    'MATCH,漏网之鱼',
   ]
 
-  const groupList = Object.entries({
-    香港: ['香港', 'Hong Kong', 'HK'],
-    台湾: ['台湾', 'Taiwan', 'TW'],
-    美国: ['美国', 'United States', 'US'],
-    日本: ['日本', 'Japan', 'JP'],
-    新加坡: ['新加坡', 'Singapore', 'SG'],
-    实验性: ['实验性'],
-    标准: ['标准'],
-    高级: ['高级'],
+  const basicAreaGroupList = Object.entries({
+    '🇭🇰 香港': ['香港', '🇭🇰', 'Hong Kong', 'HK'],
+    '🇹🇼 台湾': ['台湾', '🇹🇼', 'Taiwan', 'TW'],
+    '🇺🇸 美国': ['美国', '🇺🇸', 'United States', 'US'],
+    '🇯🇵 日本': ['日本', '🇯🇵', 'Japan', 'JP'],
+    '🇸🇬 新加坡': ['新加坡', '🇸🇬', 'Singapore', 'SG'],
+    '🇰🇷 韩国': ['韩国', '🇰🇷', 'Korea', 'KR'],
+  }).map(([name, keys]) => {
+    return {
+      name,
+      proxies: config.proxies
+        .filter((proxy) => keys.some((key) => proxy.name.includes(key)))
+        .map((proxy) => proxy.name),
+    }
   })
-    .map(([name, keys]) => {
-      return {
-        name,
-        type: 'url-test',
-        url: 'http://www.gstatic.com/generate_204',
-        interval: 86400,
-        proxies: config.proxies
-          .filter((proxy) => keys.some((key) => proxy.name.includes(key)))
-          .map((proxy) => proxy.name),
-      }
+
+  basicAreaGroupList.push({
+    name: '其他',
+    proxies: config.proxies
+      .filter((proxy) => !basicAreaGroupList.some((group) => group.proxies.includes(proxy.name)))
+      .map((proxy) => proxy.name),
+  })
+
+  const areaGroupList = basicAreaGroupList
+    .flatMap((group) => {
+      return [
+        {
+          ...group,
+          name: `${group.name}`,
+          type: 'url-test',
+          url: 'http://www.gstatic.com/generate_204',
+          interval: 180,
+        },
+        {
+          ...group,
+          name: `${group.name} 均衡`,
+          type: 'load-balance',
+          strategy: 'consistent-hashing',
+          url: 'http://www.gstatic.com/generate_204',
+          interval: 600,
+        },
+      ]
     })
     .filter((o) => {
       return o.proxies.length > 0
     })
 
-  const groupNameList = groupList.map((o) => o.name)
+  // 地区归类
+  const areaGroupNameList = areaGroupList.map((o) => o.name)
+  // 原始代理组名称列表
+  const rawGroupNameList = config.proxies.map((proxy) => proxy.name)
+  // 基础服务
+  const customGroupNameList = ['指定节点', '自动选择', '故障转移']
+  const groupNameList = customGroupNameList.concat(areaGroupNameList)
 
   config['proxy-groups'].push({
-    name: 'Final',
+    name: '漏网之鱼',
     type: 'select',
     proxies: ['DIRECT', 'PROXY'],
   })
   config['proxy-groups'].push({
     name: 'PROXY',
     type: 'select',
-    proxies: ['指定节点', '自动选择', '故障转移', ...groupNameList],
+    proxies: groupNameList,
   })
   config['proxy-groups'].push({
     name: '指定节点',
     type: 'select',
-    proxies: config.proxies.map((proxy) => proxy.name),
+    proxies: rawGroupNameList,
+  })
+  config['proxy-groups'].push({
+    name: 'e-hentai',
+    type: 'select',
+    proxies: customGroupNameList.concat(areaGroupNameList).concat(rawGroupNameList),
   })
   config['proxy-groups'].push({
     name: 'BitTorrent',
@@ -180,26 +213,21 @@ module.exports = (config) => {
     proxies: ['DIRECT', 'PROXY'],
   })
   config['proxy-groups'].push({
-    name: 'e-hentai',
-    type: 'select',
-    proxies: ['指定节点', '自动选择', '故障转移', ...config.proxies.map((proxy) => proxy.name)],
-  })
-  config['proxy-groups'].push({
     name: '自动选择',
     type: 'url-test',
     url: 'http://www.gstatic.com/generate_204',
-    interval: 7200,
-    proxies: config.proxies.map((proxy) => proxy.name),
+    interval: 180,
+    proxies: rawGroupNameList,
   })
   config['proxy-groups'].push({
     name: '故障转移',
     type: 'fallback',
     url: 'http://www.gstatic.com/generate_204',
-    interval: 7200,
-    proxies: config.proxies.map((proxy) => proxy.name),
+    interval: 60,
+    proxies: rawGroupNameList,
   })
 
-  config['proxy-groups'] = config['proxy-groups'].concat(groupList)
+  config['proxy-groups'] = config['proxy-groups'].concat(areaGroupList)
   config['proxy-groups'] = config['proxy-groups'].filter((group) => group.proxies.length > 0)
 
   return config
