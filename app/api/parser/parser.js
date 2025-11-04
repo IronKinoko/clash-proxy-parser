@@ -106,6 +106,13 @@ module.exports = (config) => {
       path: './ruleset/copymanga.yaml',
       interval: 86400,
     },
+    adblock: {
+      type: 'http',
+      behavior: 'domain',
+      url: 'https://cdn.jsdelivr.net/gh/REIJI007/AdBlock_Rule_For_Clash/adblock_reject.yaml',
+      path: './ruleset/adblock_reject.yaml',
+      interval: 86400,
+    },
   }
   config.rules = [
     'RULE-SET,applications,BitTorrent',
@@ -116,6 +123,7 @@ module.exports = (config) => {
     'DOMAIN,clash.razord.top,DIRECT',
     'DOMAIN,yacd.haishan.me,DIRECT',
     'RULE-SET,private,DIRECT',
+    'RULE-SET,adblock,REJECT',
     'RULE-SET,copymanga,PROXY',
     'RULE-SET,fanqie,REJECT',
     'RULE-SET,reject,REJECT',
