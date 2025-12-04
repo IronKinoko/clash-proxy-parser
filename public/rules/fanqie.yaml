@@ -17,6 +17,8 @@ payload:
   - DOMAIN,sf3-ttcdn-tos.pstatp.com
   - DOMAIN,v6-novelapp.ixigua.com
   - DOMAIN-KEYWORD,zijieapi
+  - DOMAIN-KEYWORD,novel.byteimg.com
+  - DOMAIN-KEYWORD,novel-sign.byteimg.com
   - DOMAIN-SUFFIX,pglstatp-toutiao.com
   - DOMAIN-SUFFIX,byteorge.com
   - DOMAIN-SUFFIX,bytegoofy.com
