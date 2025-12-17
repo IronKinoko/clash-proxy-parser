@@ -118,6 +118,7 @@ module.exports = (config) => {
     'RULE-SET,applications,BitTorrent',
     'DOMAIN-KEYWORD,steamserver.net,DIRECT',
     'DOMAIN-KEYWORD,hf-mirror.com,DIRECT',
+    'DOMAIN-KEYWORD,cauenvao.click,DIRECT',
     'DOMAIN-KEYWORD,exhentai.org,e-hentai',
     'DOMAIN-KEYWORD,e-hentai.org,e-hentai',
     'DOMAIN,clash.razord.top,DIRECT',
