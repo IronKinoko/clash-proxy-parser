@@ -243,9 +243,6 @@ const main = (config) => {
 }
 
 try {
-  module.exports = main
-
-  // clash-for-windows parser
   module.exports.parse = (raw, { yaml }) => {
     return yaml.stringify(main(yaml.parse(raw)))
   }

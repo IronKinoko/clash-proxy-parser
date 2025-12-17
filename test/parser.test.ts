@@ -1,4 +1,4 @@
-import parser from '../app/api/parser/parser.js'
+import { parse } from '../app/api/parser/parser.js'
 import yaml from 'yaml'
 import fs from 'fs'
 import path from 'path'
@@ -8,8 +8,8 @@ const raw = fs.readFileSync(path.join(__dirname, 'fixtures', 'demo.yaml'), 'utf-
 
 describe('parser', () => {
   it('should parse the config correctly', () => {
-    const config = parser(yaml.parse(raw))
-    expect(config).toBeDefined()
-    expect(yaml.stringify(config)).toMatchSnapshot()
+    const ret = parse(raw, { yaml })
+    expect(ret).toBeDefined()
+    expect(ret).toMatchSnapshot()
   })
 })

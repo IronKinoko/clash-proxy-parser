@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import parser from './parser'
+import { parse } from './parser'
 import { pick } from 'lodash-es'
 import yaml from 'yaml'
 
@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 
   const res = await fetch(url, { headers: { 'user-agent': 'ClashforWindows/0.19.23' } })
   const raw = await res.text()
-  const ret = yaml.stringify(parser(yaml.parse(raw)))
+  const ret = parse(raw, { yaml })
 
   return new Response(ret, {
     headers: pick(Object.fromEntries(res.headers.entries()), [
