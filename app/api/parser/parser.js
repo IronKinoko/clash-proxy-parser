@@ -1,4 +1,4 @@
-module.exports = (config) => {
+const main = (config) => {
   config['proxy-groups'] = []
   config['rule-providers'] = {
     reject: {
@@ -241,3 +241,12 @@ module.exports = (config) => {
 
   return config
 }
+
+try {
+  // clash-for-windows parser
+  module.exports.parse = (raw, { yaml }) => {
+    return yaml.stringify(main(yaml.parse(raw)))
+  }
+
+  module.exports = main
+} catch (error) {}
