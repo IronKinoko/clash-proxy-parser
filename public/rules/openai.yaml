@@ -1,5 +1,5 @@
-# NAME: OpenAI Classical
-# https://github.com/v2fly/domain-list-community/blob/master/data/openai
+# 这是由 transform-v2ray-rules.ts 脚本生成的规则文件
+# 规则源于 https://github.com/v2fly/domain-list-community/raw/refs/heads/master/data/openai
 payload:
   # Main domain
   - DOMAIN-SUFFIX,chat.com
@@ -11,19 +11,20 @@ payload:
   - DOMAIN-SUFFIX,sora.com
 
   # CDN & API
-  - DOMAIN,openai.com.cdn.cloudflare.net
+  - DOMAIN-SUFFIX,openai.com.cdn.cloudflare.net
   - DOMAIN,openaiapi-site.azureedge.net
   - DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
   - DOMAIN,openaicom.imgix.net
   - DOMAIN,openaicomproductionae4b.blob.core.windows.net
   - DOMAIN,production-openaicom-storage.azureedge.net
-  - DOMAIN-REGEX,^chatgpt-async-webps-prod-\S+-\d+\.webpubsub\.azure\.com$
+  - DOMAIN-REGEXP,^chatgpt-async-webps-prod-\S+-\d+\.webpubsub\.azure\.com$
 
-  # tracking (@ads)
-  - DOMAIN,o33249.ingest.sentry.io
-  - DOMAIN,browser-intake-datadoghq.com
+  # tracking
+  - DOMAIN,o33249.ingest.sentry.io # @ads
+  - DOMAIN,browser-intake-datadoghq.com # @ads
 
   # Advanced Voice
   - DOMAIN-SUFFIX,chatgpt.livekit.cloud
   - DOMAIN-SUFFIX,host.livekit.cloud
   - DOMAIN-SUFFIX,turn.livekit.cloud
+

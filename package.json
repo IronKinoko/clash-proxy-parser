@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "next dev",
+    "transform-v2ray-rules": "ts-node scripts/transform-v2ray-rules.ts",
     "test": "jest",
     "test:watch": "jest --watch"
   },
