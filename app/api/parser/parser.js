@@ -113,6 +113,13 @@ const main = (config) => {
       path: './ruleset/adblock_reject.yaml',
       interval: 86400,
     },
+    openai: {
+      type: 'http',
+      behavior: 'domain',
+      url: 'https://cdn.jsdelivr.net/gh/ironkinoko/clash-proxy-parser/public/rules/openai.yaml',
+      path: './ruleset/openai.yaml',
+      interval: 86400,
+    },
   }
   config.rules = [
     'RULE-SET,applications,BitTorrent',
@@ -126,6 +133,7 @@ const main = (config) => {
     'DOMAIN,yacd.haishan.me,DIRECT',
     'RULE-SET,private,DIRECT',
     'RULE-SET,adblock,REJECT',
+    'RULE-SET,openai,OpenAI',
     'RULE-SET,copymanga,PROXY',
     'RULE-SET,fanqie,REJECT',
     'RULE-SET,reject,REJECT',
@@ -214,6 +222,11 @@ const main = (config) => {
   })
   config['proxy-groups'].push({
     name: 'e-hentai',
+    type: 'select',
+    proxies: customGroupNameList.concat(areaGroupNameList).concat(rawGroupNameList),
+  })
+  config['proxy-groups'].push({
+    name: 'OpenAI',
     type: 'select',
     proxies: customGroupNameList.concat(areaGroupNameList).concat(rawGroupNameList),
   })
