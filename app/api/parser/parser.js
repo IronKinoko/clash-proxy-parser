@@ -115,7 +115,7 @@ const main = (config) => {
     },
     openai: {
       type: 'http',
-      behavior: 'domain',
+      behavior: 'classical',
       url: 'https://cdn.jsdelivr.net/gh/ironkinoko/clash-proxy-parser/public/rules/openai.yaml',
       path: './ruleset/openai.yaml',
       interval: 86400,
