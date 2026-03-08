@@ -1,3 +1,5 @@
+// update：https://github.com/IronKinoko/clash-proxy-parser/raw/refs/heads/master/app/api/parser/parser.js
+
 const main = (config) => {
   config['proxy-groups'] = []
   config['rule-providers'] = {
