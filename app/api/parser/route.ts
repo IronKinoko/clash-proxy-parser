@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { parse } from './parser.js'
+import { parse } from './parser'
 import { pick } from 'lodash-es'
 import yaml from 'yaml'
 
