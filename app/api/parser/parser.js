@@ -154,7 +154,7 @@ const main = (config) => {
 
   const basicAreaGroupList = Object.entries({
     '🇭🇰 香港': ['香港', '🇭🇰', 'Hong Kong', 'HK'],
-    '🇹🇼 台湾': ['台湾', '🇹🇼', 'Taiwan', 'TW'],
+    '🇨🇳 台湾': ['台湾', '🇨🇳', 'Taiwan', 'TW'],
     '🇺🇸 美国': ['美国', '🇺🇸', 'United States', 'US'],
     '🇯🇵 日本': ['日本', '🇯🇵', 'Japan', 'JP'],
     '🇸🇬 新加坡': ['新加坡', '🇸🇬', 'Singapore', 'SG'],
@@ -163,9 +163,17 @@ const main = (config) => {
     return {
       name,
       proxies: config.proxies
-        .filter((proxy) => keys.some((key) => proxy.name.includes(key)))
+        .filter((proxy) => keys.some((key) => proxy.name.toLowerCase().includes(key.toLowerCase())))
         .map((proxy) => proxy.name),
     }
+  })
+
+  // 实验性过滤出来
+  const experimentalKeys = ['实验性', 'Experimental', '测试', 'Test', 'Beta']
+  basicAreaGroupList.forEach((group) => {
+    group.proxies = group.proxies.filter((proxy) => {
+      return !experimentalKeys.some((key) => proxy.toLowerCase().includes(key.toLowerCase()))
+    })
   })
 
   basicAreaGroupList.push({
