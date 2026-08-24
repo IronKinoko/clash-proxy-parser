@@ -126,6 +126,7 @@ const main = (config) => {
   config.rules = [
     'RULE-SET,applications,BitTorrent',
     'DOMAIN-KEYWORD,steamserver.net,DIRECT',
+    'DOMAIN-KEYWORD,hf.co,DIRECT',
     'DOMAIN-KEYWORD,hf-mirror.com,DIRECT',
     'DOMAIN-KEYWORD,cauenvao.click,DIRECT',
     'DOMAIN-KEYWORD,selectgroup.click,DIRECT',
