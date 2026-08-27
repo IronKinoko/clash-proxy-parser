@@ -90,7 +90,7 @@ const main = (config) => {
     applications: {
       type: 'http',
       behavior: 'classical',
-      url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt',
+      url: 'https://cdn.jsdelivr.net/gh/ironkinoko/clash-proxy-parser/public/rules/applications.yaml',
       path: './ruleset/applications.yaml',
       interval: 86400,
     },
@@ -124,32 +124,38 @@ const main = (config) => {
     },
   }
   config.rules = [
-    'RULE-SET,applications,BitTorrent',
+    'RULE-SET,adblock,REJECT',
+    'RULE-SET,fanqie,REJECT',
+    'RULE-SET,reject,REJECT',
+
+    'DOMAIN-KEYWORD,exhentai.org,e-hentai',
+    'DOMAIN-KEYWORD,e-hentai.org,e-hentai',
+
+    'RULE-SET,private,DIRECT',
+    'RULE-SET,direct,DIRECT',
+    'RULE-SET,lancidr,DIRECT',
+    'RULE-SET,cncidr,DIRECT',
+    'RULE-SET,icloud,DIRECT',
+    'RULE-SET,apple,DIRECT',
+    'RULE-SET,google,DIRECT',
+    'GEOIP,LAN,DIRECT',
+    'GEOIP,CN,DIRECT',
+
+    'RULE-SET,applications,Download',
+
+    'RULE-SET,copymanga,PROXY',
+
     'DOMAIN-KEYWORD,steamserver.net,DIRECT',
     'DOMAIN-KEYWORD,hf.co,DIRECT',
     'DOMAIN-KEYWORD,hf-mirror.com,DIRECT',
     'DOMAIN-KEYWORD,cauenvao.click,DIRECT',
     'DOMAIN-KEYWORD,selectgroup.click,DIRECT',
-    'DOMAIN-KEYWORD,exhentai.org,e-hentai',
-    'DOMAIN-KEYWORD,e-hentai.org,e-hentai',
     'DOMAIN,clash.razord.top,DIRECT',
     'DOMAIN,yacd.haishan.me,DIRECT',
-    'RULE-SET,private,DIRECT',
-    'RULE-SET,adblock,REJECT',
+
     'RULE-SET,openai,OpenAI',
-    'RULE-SET,copymanga,PROXY',
-    'RULE-SET,fanqie,REJECT',
-    'RULE-SET,reject,REJECT',
-    'RULE-SET,icloud,DIRECT',
-    'RULE-SET,apple,DIRECT',
-    'RULE-SET,google,DIRECT',
     'RULE-SET,proxy,PROXY',
-    'RULE-SET,direct,DIRECT',
-    'RULE-SET,lancidr,DIRECT',
-    'RULE-SET,cncidr,DIRECT',
     'RULE-SET,telegramcidr,PROXY',
-    'GEOIP,LAN,DIRECT',
-    'GEOIP,CN,DIRECT',
     'MATCH,漏网之鱼',
   ]
 
@@ -242,9 +248,9 @@ const main = (config) => {
     proxies: customGroupNameList.concat(areaGroupNameList).concat(rawGroupNameList),
   })
   config['proxy-groups'].push({
-    name: 'BitTorrent',
+    name: 'Download',
     type: 'select',
-    proxies: ['DIRECT', 'PROXY'],
+    proxies: customGroupNameList.concat(areaGroupNameList).concat(rawGroupNameList),
   })
   config['proxy-groups'].push({
     name: '自动选择',
