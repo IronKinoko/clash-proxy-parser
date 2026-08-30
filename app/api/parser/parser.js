@@ -213,7 +213,7 @@ const main = (config) => {
   // 原始代理组名称列表
   const rawGroupNameList = config.proxies.map((proxy) => proxy.name)
   // 基础服务
-  const customGroupNameList = ['指定节点', '自动选择', '故障转移']
+  const customGroupNameList = ['DIRECT', '指定节点', '自动选择', '故障转移']
   const groupNameList = customGroupNameList.concat(areaGroupNameList)
 
   config['proxy-groups'].push({
