@@ -213,7 +213,7 @@ const main = (config) => {
   // 原始代理组名称列表
   const rawGroupNameList = config.proxies.map((proxy) => proxy.name)
   // 基础服务
-  const customGroupNameList = ['DIRECT', '指定节点', '自动选择', '故障转移']
+  const customGroupNameList = ['指定节点', '自动选择', '故障转移']
   const groupNameList = customGroupNameList.concat(areaGroupNameList)
 
   config['proxy-groups'].push({
@@ -244,7 +244,10 @@ const main = (config) => {
   config['proxy-groups'].push({
     name: 'Download',
     type: 'select',
-    proxies: customGroupNameList.concat(areaGroupNameList).concat(rawGroupNameList),
+    proxies: ['DIRECT']
+      .concat(customGroupNameList)
+      .concat(areaGroupNameList)
+      .concat(rawGroupNameList),
   })
   config['proxy-groups'].push({
     name: '自动选择',
