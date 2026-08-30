@@ -128,9 +128,6 @@ const main = (config) => {
     'RULE-SET,fanqie,REJECT',
     'RULE-SET,reject,REJECT',
 
-    'DOMAIN-KEYWORD,exhentai.org,e-hentai',
-    'DOMAIN-KEYWORD,e-hentai.org,e-hentai',
-
     'RULE-SET,private,DIRECT',
     'RULE-SET,direct,DIRECT',
     'RULE-SET,lancidr,DIRECT',
@@ -141,10 +138,6 @@ const main = (config) => {
     'GEOIP,LAN,DIRECT',
     'GEOIP,CN,DIRECT',
 
-    'RULE-SET,applications,Download',
-
-    'RULE-SET,copymanga,PROXY',
-
     'DOMAIN-KEYWORD,steamserver.net,DIRECT',
     'DOMAIN-KEYWORD,hf.co,DIRECT',
     'DOMAIN-KEYWORD,hf-mirror.com,DIRECT',
@@ -153,7 +146,14 @@ const main = (config) => {
     'DOMAIN,clash.razord.top,DIRECT',
     'DOMAIN,yacd.haishan.me,DIRECT',
 
+    'DOMAIN-KEYWORD,exhentai.org,e-hentai',
+    'DOMAIN-KEYWORD,e-hentai.org,e-hentai',
+
+    'RULE-SET,applications,Download',
+
     'RULE-SET,openai,OpenAI',
+
+    'RULE-SET,copymanga,PROXY',
     'RULE-SET,proxy,PROXY',
     'RULE-SET,telegramcidr,PROXY',
     'MATCH,漏网之鱼',
