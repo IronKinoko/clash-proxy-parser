@@ -139,12 +139,6 @@ const main = (config) => {
     'GEOIP,CN,DIRECT',
 
     'DOMAIN-KEYWORD,steamserver.net,DIRECT',
-    'DOMAIN-KEYWORD,hf.co,DIRECT',
-    'DOMAIN-KEYWORD,hf-mirror.com,DIRECT',
-    'DOMAIN-KEYWORD,cauenvao.click,DIRECT',
-    'DOMAIN-KEYWORD,selectgroup.click,DIRECT',
-    'DOMAIN,clash.razord.top,DIRECT',
-    'DOMAIN,yacd.haishan.me,DIRECT',
 
     'DOMAIN-KEYWORD,exhentai.org,e-hentai',
     'DOMAIN-KEYWORD,e-hentai.org,e-hentai',
