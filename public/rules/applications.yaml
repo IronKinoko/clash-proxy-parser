@@ -97,5 +97,5 @@ payload:
   - PROCESS-NAME,xdm.exe
   - PROCESS-NAME,xdman
   - PROCESS-NAME,xdman.exe
-  - PROCESS-NAME,IDM
-  - PROCESS-NAME,IDM.exe
+  - PROCESS-NAME,IDMan
+  - PROCESS-NAME,IDMan.exe
