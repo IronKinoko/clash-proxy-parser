@@ -1,5 +1,37 @@
 // update：https://github.com/IronKinoko/clash-proxy-parser/raw/refs/heads/master/app/api/parser/parser.js
 
+const PROXY_RULES = [
+  'RULE-SET,adblock,REJECT',
+  'RULE-SET,fanqie,REJECT',
+  'RULE-SET,reject,REJECT',
+
+  'RULE-SET,private,DIRECT',
+  'RULE-SET,direct,DIRECT',
+  'RULE-SET,lancidr,DIRECT',
+  'RULE-SET,cncidr,DIRECT',
+  'RULE-SET,icloud,DIRECT',
+  'RULE-SET,apple,DIRECT',
+  'RULE-SET,google,DIRECT',
+  'GEOIP,LAN,DIRECT',
+  'GEOIP,CN,DIRECT',
+
+  'DOMAIN-KEYWORD,cycani.org,DIRECT',
+  'DOMAIN-KEYWORD,steamserver.net,DIRECT',
+  'RULE-SET,applications_net,DIRECT',
+
+  'DOMAIN-KEYWORD,exhentai.org,e-hentai',
+  'DOMAIN-KEYWORD,e-hentai.org,e-hentai',
+
+  'RULE-SET,download,Download',
+
+  'RULE-SET,openai,OpenAI',
+
+  'RULE-SET,copymanga,PROXY',
+  'RULE-SET,proxy,PROXY',
+  'RULE-SET,telegramcidr,PROXY',
+  'MATCH,漏网之鱼',
+]
+
 const main = (config) => {
   config['proxy-groups'] = []
   config['rule-providers'] = {
@@ -87,11 +119,18 @@ const main = (config) => {
       path: './ruleset/lancidr.yaml',
       interval: 86400,
     },
-    applications: {
+    applications_net: {
       type: 'http',
       behavior: 'classical',
-      url: 'https://cdn.jsdelivr.net/gh/ironkinoko/clash-proxy-parser/public/rules/applications.yaml',
-      path: './ruleset/applications.yaml',
+      url: 'https://cdn.jsdelivr.net/gh/ironkinoko/clash-proxy-parser/public/rules/applications_net.yaml',
+      path: './ruleset/applications_net.yaml',
+      interval: 86400,
+    },
+    download: {
+      type: 'http',
+      behavior: 'classical',
+      url: 'https://cdn.jsdelivr.net/gh/ironkinoko/clash-proxy-parser/public/rules/download.yaml',
+      path: './ruleset/download.yaml',
       interval: 86400,
     },
     fanqie: {
@@ -123,35 +162,7 @@ const main = (config) => {
       interval: 86400,
     },
   }
-  config.rules = [
-    'RULE-SET,adblock,REJECT',
-    'RULE-SET,fanqie,REJECT',
-    'RULE-SET,reject,REJECT',
-
-    'RULE-SET,private,DIRECT',
-    'RULE-SET,direct,DIRECT',
-    'RULE-SET,lancidr,DIRECT',
-    'RULE-SET,cncidr,DIRECT',
-    'RULE-SET,icloud,DIRECT',
-    'RULE-SET,apple,DIRECT',
-    'RULE-SET,google,DIRECT',
-    'GEOIP,LAN,DIRECT',
-    'GEOIP,CN,DIRECT',
-
-    'DOMAIN-KEYWORD,steamserver.net,DIRECT',
-
-    'DOMAIN-KEYWORD,exhentai.org,e-hentai',
-    'DOMAIN-KEYWORD,e-hentai.org,e-hentai',
-
-    'RULE-SET,applications,Download',
-
-    'RULE-SET,openai,OpenAI',
-
-    'RULE-SET,copymanga,PROXY',
-    'RULE-SET,proxy,PROXY',
-    'RULE-SET,telegramcidr,PROXY',
-    'MATCH,漏网之鱼',
-  ]
+  config.rules = PROXY_RULES
 
   const basicAreaGroupList = Object.entries({
     '🇭🇰 香港': ['香港', '🇭🇰', 'Hong Kong', 'HK'],
@@ -266,6 +277,23 @@ const main = (config) => {
 
   config['proxy-groups'] = config['proxy-groups'].concat(areaGroupList)
   config['proxy-groups'] = config['proxy-groups'].filter((group) => group.proxies.length > 0)
+
+  // 主要是排除 tailscale 的网段
+  config.tun = config.tun || {}
+  config.tun = {
+    ...config.tun,
+    'route-exclude-address': [
+      ...(config.tun['route-exclude-address'] || []),
+      '100.64.0.0/10',
+      'fd7a:115c:a1e0::/48',
+    ],
+  }
+  if (config.dns) {
+    config.dns['nameserver-policy'] = {
+      ...config.dns['nameserver-policy'],
+      '+.ts.net': ['100.100.100.100'],
+    }
+  }
 
   return config
 }
