@@ -293,6 +293,7 @@ const main = (config) => {
       ...config.dns['nameserver-policy'],
       '+.ts.net': ['100.100.100.100'],
     }
+    config.dns['fake-ip-filter'] = [...(config.dns['fake-ip-filter'] || []), '+.ts.net']
   }
 
   return config
