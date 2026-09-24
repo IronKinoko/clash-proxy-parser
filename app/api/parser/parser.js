@@ -5,6 +5,17 @@ const PROXY_RULES = [
   'RULE-SET,fanqie,REJECT',
   'RULE-SET,reject,REJECT',
 
+  'RULE-SET,copymanga,PROXY',
+  'RULE-SET,proxy,PROXY',
+  'RULE-SET,telegramcidr,PROXY',
+
+  'DOMAIN-KEYWORD,exhentai.org,e-hentai',
+  'DOMAIN-KEYWORD,e-hentai.org,e-hentai',
+
+  'RULE-SET,download,Download',
+
+  'RULE-SET,openai,OpenAI',
+
   'RULE-SET,private,DIRECT',
   'RULE-SET,direct,DIRECT',
   'RULE-SET,lancidr,DIRECT',
@@ -15,20 +26,12 @@ const PROXY_RULES = [
   'GEOIP,LAN,DIRECT',
   'GEOIP,CN,DIRECT',
 
+  'DOMAIN-KEYWORD,hf.co,DIRECT',
+  'DOMAIN-KEYWORD,hembed.com,DIRECT',
   'DOMAIN-KEYWORD,cycani.org,DIRECT',
   'DOMAIN-KEYWORD,steamserver.net,DIRECT',
   'RULE-SET,applications_net,DIRECT',
 
-  'DOMAIN-KEYWORD,exhentai.org,e-hentai',
-  'DOMAIN-KEYWORD,e-hentai.org,e-hentai',
-
-  'RULE-SET,download,Download',
-
-  'RULE-SET,openai,OpenAI',
-
-  'RULE-SET,copymanga,PROXY',
-  'RULE-SET,proxy,PROXY',
-  'RULE-SET,telegramcidr,PROXY',
   'MATCH,漏网之鱼',
 ]
 
