@@ -5,16 +5,14 @@ const PROXY_RULES = [
   'RULE-SET,fanqie,REJECT',
   'RULE-SET,reject,REJECT',
 
-  'RULE-SET,copymanga,PROXY',
-  'RULE-SET,proxy,PROXY',
-  'RULE-SET,telegramcidr,PROXY',
-
+  'RULE-SET,download,Download',
+  'RULE-SET,openai,OpenAI',
   'DOMAIN-KEYWORD,exhentai.org,e-hentai',
   'DOMAIN-KEYWORD,e-hentai.org,e-hentai',
 
-  'RULE-SET,download,Download',
-
-  'RULE-SET,openai,OpenAI',
+  'RULE-SET,copymanga,PROXY',
+  'RULE-SET,proxy,PROXY',
+  'RULE-SET,telegramcidr,PROXY',
 
   'RULE-SET,private,DIRECT',
   'RULE-SET,direct,DIRECT',
