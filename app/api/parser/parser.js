@@ -1,34 +1,34 @@
 // update：https://github.com/IronKinoko/clash-proxy-parser/raw/refs/heads/master/app/api/parser/parser.js
 
 const PROXY_RULES = [
-  'RULE-SET,adblock,REJECT',
+  'RULE-SET,applications_net,DIRECT',
+  'RULE-SET,private,DIRECT',
+
   'RULE-SET,fanqie,REJECT',
   'RULE-SET,reject,REJECT',
+
+  'DOMAIN-KEYWORD,hf.co,DIRECT',
+  'DOMAIN-KEYWORD,hembed.com,DIRECT',
+  'DOMAIN-KEYWORD,cycani.org,DIRECT',
+  'DOMAIN-KEYWORD,steamserver.net,DIRECT',
 
   'RULE-SET,download,Download',
   'RULE-SET,openai,OpenAI',
   'DOMAIN-KEYWORD,exhentai.org,e-hentai',
   'DOMAIN-KEYWORD,e-hentai.org,e-hentai',
 
+  'RULE-SET,icloud,DIRECT',
+  'RULE-SET,apple,DIRECT',
+
   'RULE-SET,copymanga,PROXY',
   'RULE-SET,proxy,PROXY',
   'RULE-SET,telegramcidr,PROXY',
 
-  'RULE-SET,private,DIRECT',
   'RULE-SET,direct,DIRECT',
   'RULE-SET,lancidr,DIRECT',
   'RULE-SET,cncidr,DIRECT',
-  'RULE-SET,icloud,DIRECT',
-  'RULE-SET,apple,DIRECT',
-  'RULE-SET,google,DIRECT',
   'GEOIP,LAN,DIRECT',
   'GEOIP,CN,DIRECT',
-
-  'DOMAIN-KEYWORD,hf.co,DIRECT',
-  'DOMAIN-KEYWORD,hembed.com,DIRECT',
-  'DOMAIN-KEYWORD,cycani.org,DIRECT',
-  'DOMAIN-KEYWORD,steamserver.net,DIRECT',
-  'RULE-SET,applications_net,DIRECT',
 
   'MATCH,漏网之鱼',
 ]
@@ -55,13 +55,6 @@ const main = (config) => {
       behavior: 'domain',
       url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt',
       path: './ruleset/apple.yaml',
-      interval: 86400,
-    },
-    google: {
-      type: 'http',
-      behavior: 'domain',
-      url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt',
-      path: './ruleset/google.yaml',
       interval: 86400,
     },
     proxy: {
@@ -146,13 +139,6 @@ const main = (config) => {
       behavior: 'classical',
       url: 'https://cdn.jsdelivr.net/gh/ironkinoko/clash-proxy-parser/public/rules/copymanga.yaml',
       path: './ruleset/copymanga.yaml',
-      interval: 86400,
-    },
-    adblock: {
-      type: 'http',
-      behavior: 'domain',
-      url: 'https://cdn.jsdelivr.net/gh/REIJI007/AdBlock_Rule_For_Clash/adblock_reject.yaml',
-      path: './ruleset/adblock_reject.yaml',
       interval: 86400,
     },
     openai: {
